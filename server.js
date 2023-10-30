@@ -97,14 +97,12 @@ app.delete("/api/movie/:id", (req, res) => {
     const movieId = req.params.id;
     console.log("movie id:", movieId);
 
-    const statement = `
-    DELETE FROM movies
-    WHERE id = ?
-    `
+    const statement = `DELETE FROM movies WHERE id = ?;`
     db.query(statement, movieId, (err, results) => {
         if (err) {
             console.error(err);
             res.send(500);
+            return;
         }        
         
         // Show the current list of movies after deletion
